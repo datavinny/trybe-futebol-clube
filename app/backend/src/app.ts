@@ -1,6 +1,4 @@
 import * as express from 'express';
-
-// commit inicial
 class App {
   public app: express.Express;
 
