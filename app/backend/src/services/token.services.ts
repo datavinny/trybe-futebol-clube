@@ -1,8 +1,7 @@
 import * as jwt from 'jsonwebtoken';
-import Login from '../interfaces/login.interface';
+import 'dotenv/config';
 
-const generateToken = (user: Login): string => {
-  const payload = user;
+const generateToken = (payload: string): string => {
   const secret = process.env.JWT_SECRET as string || 'jwt_secret';
   const options: jwt.SignOptions = {
     algorithm: 'HS256',
