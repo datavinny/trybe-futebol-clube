@@ -1,19 +1,29 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import ILogin from '../utils/interfaces/login.interface';
 import LoginService from '../services/login.services';
 
 class LoginController {
-  constructor(private loginService = new LoginService()) { }
+  // constructor(private loginService = new LoginService()) { }
 
-  // public getAll = async (_req: Request, res: Response) => {
-  //   const users = await this.userService.getAll();
-  //   res.status(StatusCodes.OK).json(users);
-  // };
+  public static async checkLogin(req: Request, res: Response, next: NextFunction) {
+    try {
+      const login = req.body as ILogin;
+      const result = await LoginService.checkLogin(login);
+      res.status(StatusCodes.OK).json({ token: result });
+    } catch (error) {
+      next(error);
+    }
+  }
 
-  public async create(req: Request, res: Response) {
-    const payload = req.body;
-    const result = await this.loginService.create(payload);
-    res.status(StatusCodes.OK).json({ token: result });
+  public static async validate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const token = req.headers.authorization;
+      const result = await LoginService.validate(token as string);
+      res.status(StatusCodes.OK).json({ role: result });
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

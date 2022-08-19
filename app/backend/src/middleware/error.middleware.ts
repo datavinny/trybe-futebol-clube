@@ -2,10 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunction) => {
-  const { name, message, details } = err as any;
-  console.log(`name: ${name}`);
-
+  const { name, message, details, statusCode } = err as any;
   switch (name) {
+    case 'CustomError':
+      res.status(statusCode).json({ message }); break;
     case 'ValidationError':
       res.status(StatusCodes.BAD_REQUEST).json({ message: details[0].message });
       break;
@@ -19,7 +19,6 @@ const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunc
       console.error(err);
       res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
   }
-
   next();
 };
 

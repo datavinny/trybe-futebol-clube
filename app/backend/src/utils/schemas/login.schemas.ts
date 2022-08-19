@@ -5,7 +5,7 @@ const login = Joi.object({
   email: Joi.string().email().required().messages(
     { ...messages, 'string.email': '{{#label}} must be a valid email' },
   ),
-  password: Joi.string().min(6).required().required()
+  password: Joi.string().min(6).required()
     .messages(messages),
 
 });
