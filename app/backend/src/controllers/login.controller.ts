@@ -4,12 +4,12 @@ import ILogin from '../utils/interfaces/login.interface';
 import LoginService from '../services/login.services';
 
 class LoginController {
-  // constructor(private loginService = new LoginService()) { }
+  constructor(private _service = new LoginService()) { }
 
-  public static async checkLogin(req: Request, res: Response, next: NextFunction) {
+  public async checkLogin(req: Request, res: Response, next: NextFunction) {
     try {
       const login = req.body as ILogin;
-      const result = await LoginService.checkLogin(login);
+      const result = await this._service.checkLogin(login);
       res.status(StatusCodes.OK).json({ token: result });
     } catch (error) {
       next(error);
