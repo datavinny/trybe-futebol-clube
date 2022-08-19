@@ -7,6 +7,6 @@ const router = Router();
 const loginMiddleware = new LoginMiddleware();
 
 router.post('/login', loginMiddleware.validateBody, LoginController.checkLogin);
-router.get('/login/validate', loginMiddleware.validateBody, LoginController.validate);
+router.get('/login/validate', LoginController.validate);
 
 export default router;
