@@ -5,7 +5,7 @@ import ILogin from '../utils/interfaces/login.interface';
 import generateToken from '../utils/JWT/generateToken';
 import verifyToken from '../utils/JWT/verifyToken';
 
-class LoginService {
+class UserService {
   constructor(private _model = UserModel) { }
 
   public async checkLogin(login: ILogin): Promise<string> {
@@ -18,7 +18,7 @@ class LoginService {
     return token;
   }
 
-  public static async validate(token: string): Promise<string> {
+  public static async getUserRole(token: string): Promise<string> {
     // const { email } = verifyToken(token);
     // const user = await this._model.findOne({ where: { email }, raw: true });
     // if (!user) throw new Error();
@@ -28,4 +28,4 @@ class LoginService {
   }
 }
 
-export default LoginService;
+export default UserService;
