@@ -4,10 +4,15 @@ class TeamService {
   constructor(private _model = TeamModel) { }
 
   public async getAll(): Promise<TeamModel[]> {
-    console.log('test');
     const teams = await this._model.findAll({ raw: true });
-    console.log('teams', teams);
     return teams;
+  }
+
+  public async getById(id: number): Promise<TeamModel> {
+    const team = await this._model.findByPk(id);
+    console.log(team);
+    if (!team) throw new Error('Not Found.');
+    return team;
   }
 }
 
