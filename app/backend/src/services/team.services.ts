@@ -1,4 +1,6 @@
+import { StatusCodes } from 'http-status-codes';
 import TeamModel from '../database/models/team';
+import CustomError from '../utils/customError';
 
 class TeamService {
   constructor(private _model = TeamModel) { }
@@ -10,8 +12,7 @@ class TeamService {
 
   public async getById(id: number): Promise<TeamModel> {
     const team = await this._model.findByPk(id);
-    console.log(team);
-    if (!team) throw new Error('Not Found.');
+    if (!team) throw new CustomError(StatusCodes.NOT_FOUND, 'Not Found.');
     return team;
   }
 }
