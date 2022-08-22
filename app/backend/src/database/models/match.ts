@@ -66,10 +66,10 @@ Match.init({
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
-// OtherModel.belongsTo(Matches, { foreignKey: 'campoA', as: 'campoEstrangeiroA' });
-// OtherModel.belongsTo(Matches, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
+Match.hasMany(TeamModel, { foreignKey: 'homeTeam' });
+Match.hasMany(TeamModel, { foreignKey: 'awayTeam' });
 
-Match.hasMany(TeamModel, { foreignKey: 'id', as: 'homeTeam' });
-Match.hasMany(TeamModel, { foreignKey: 'id', as: 'awayTeam' });
+TeamModel.belongsTo(Match);
+TeamModel.belongsTo(Match);
 
 export default Match;
