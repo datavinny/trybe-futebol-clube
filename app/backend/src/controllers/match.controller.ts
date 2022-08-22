@@ -7,7 +7,18 @@ class MatchesController {
 
   public async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this._service.getAll();
+      const { query } = req;
+      const result = await this._service.getAll(query);
+      res.status(StatusCodes.OK).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async createMatch(req: Request, res: Response, next: NextFunction) {
+    try {
+      const match = req.body;
+      const result = await this._service.createMatch(match);
       res.status(StatusCodes.OK).json(result);
     } catch (error) {
       next(error);
