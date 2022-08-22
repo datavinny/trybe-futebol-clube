@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import isTokenValid from '../middleware/token.middleware';
+import authToken from '../middleware/token.middleware';
 import MatchesController from '../controllers/match.controller';
 
 const router = Router();
@@ -10,7 +10,7 @@ router.get('/matches', (req, res, next) => matchesController.getAll(req, res, ne
 
 router.post(
   '/matches',
-  isTokenValid,
+  authToken,
   (req, res, next) => matchesController.createMatch(req, res, next),
 );
 

@@ -1,6 +1,6 @@
 import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
-import TeamModel from './team';
+import Team from './team';
 
 class Match extends Model {
   public id!: number;
@@ -21,13 +21,10 @@ Match.init({
   homeTeam: {
     allowNull: false,
     type: INTEGER,
-    // Configuram o que deve acontecer ao atualizar ou excluir um team
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
     references: {
-      // Informa a tabela da referência da associação
       model: 'Team',
-      // Informa a coluna da referência que é a chave correspondente
       key: 'id',
     },
   },
@@ -66,10 +63,10 @@ Match.init({
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
-Match.hasMany(TeamModel, { foreignKey: 'homeTeam' });
-Match.hasMany(TeamModel, { foreignKey: 'awayTeam' });
+Match.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
+Match.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
 
-TeamModel.belongsTo(Match);
-TeamModel.belongsTo(Match);
+// Match.hasMany(Team, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
+// Match.hasMany(Team, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
 export default Match;

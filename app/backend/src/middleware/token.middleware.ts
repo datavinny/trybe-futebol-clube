@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import verifyToken from '../utils/JWT/verifyToken';
 
-const isTokenValid = async (req: Request, res: Response, next: NextFunction) => {
+const authToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization;
     const result = verifyToken(token as string);
@@ -12,4 +12,4 @@ const isTokenValid = async (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
-export default isTokenValid;
+export default authToken;
