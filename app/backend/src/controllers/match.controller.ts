@@ -8,7 +8,7 @@ class MatchesController {
   public async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const { query } = req;
-      const result = await this._service.getAll(query);
+      const result = await this._service.getAll(query as { inProgress: string });
       res.status(StatusCodes.OK).json(result);
     } catch (error) {
       next(error);

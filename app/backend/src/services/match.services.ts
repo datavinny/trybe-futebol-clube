@@ -5,7 +5,7 @@ import TeamModel from '../database/models/team';
 class MatchesService {
   constructor(private _model = MatchModel) { }
 
-  public async getAll(query: any): Promise<IMatch[]> {
+  public async getAll(query: { inProgress: string }): Promise<IMatch[]> {
     let value = {};
     if (query && query.inProgress) value = { inProgress: query.inProgress === 'true' ? 1 : 0 };
     const data = await this._model.findAll({ where: value, raw: true });
