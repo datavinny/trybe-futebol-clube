@@ -24,6 +24,16 @@ class MatchesController {
       next(error);
     }
   }
+
+  public async changeMatch(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      await this._service.changeMatch(Number(id));
+      res.status(StatusCodes.OK).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default MatchesController;
