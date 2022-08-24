@@ -10,6 +10,7 @@ interface ILeaderboard {
   goalsBalance: number,
   efficiency: string,
   teamHome?: { teamName:string },
+  teamAway?: { teamName:string },
 }
 
 export default ILeaderboard;

@@ -13,6 +13,15 @@ class LeaderboardController {
       next(error);
     }
   }
+
+  public async getAwayLeaderboard(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await this._service.getAwayLeaderboard();
+      res.status(StatusCodes.OK).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default LeaderboardController;
