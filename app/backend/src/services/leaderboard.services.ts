@@ -46,8 +46,7 @@ class LeaderboardService {
       efficiency,
       goalsBalance,
       order });
-    const respose = result.map(({ teamHome, ...rest }) => ({ name: teamHome?.teamName, ...rest }));
-    return respose as unknown as ILeaderboard[];
+    return result.map(({ teamHome, ...rest }) => ({ name: teamHome?.teamName, ...rest }));
   }
 }
 

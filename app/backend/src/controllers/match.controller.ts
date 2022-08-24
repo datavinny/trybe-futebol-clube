@@ -19,7 +19,7 @@ class MatchesController {
     try {
       const match = req.body;
       const result = await this._service.createMatch(match);
-      res.status(StatusCodes.OK).json(result);
+      res.status(StatusCodes.CREATED).json(result);
     } catch (error) {
       next(error);
     }
