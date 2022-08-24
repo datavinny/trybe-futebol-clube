@@ -10,7 +10,7 @@ class LeaderboardService {
   ) { }
 
   public async homeLeaderboard(queries: any): Promise<ILeaderboard[]> {
-    const result = await this._matchModel.findAll({ where: { inProgress: false },
+    const data = await this._matchModel.findAll({ where: { inProgress: false },
       attributes: [[sequelize.fn('COUNT', sequelize.col('home_team')), 'totalGames'],
         [sequelize.fn('SUM', sequelize.col('home_team_goals')), 'goalsFavor'],
         [sequelize.fn('SUM', sequelize.col('away_team_goals')), 'goalsOwn'],
@@ -26,7 +26,7 @@ class LeaderboardService {
       order: [sequelize.literal(queries.orderBy)],
       raw: true,
       nest: true });
-    return result as unknown as ILeaderboard[];
+    return data as unknown as ILeaderboard[];
   }
 
   public async getHomeLeaderboard(): Promise<ILeaderboard[]> {
