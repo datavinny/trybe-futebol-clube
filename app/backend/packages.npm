@@ -1,5 +1,3 @@
 http-status-codes
-jwt
-@types/jsonwebtoken
 joi
 @types/joi
