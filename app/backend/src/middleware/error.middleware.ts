@@ -7,7 +7,7 @@ const errorMiddleware = (err: Error, req: Request, res: Response, next: NextFunc
     case 'CustomError':
       res.status(statusCode).json({ message }); break;
     case 'JsonWebTokenError':
-      res.status(StatusCodes.UNAUTHORIZED).json({ message }); break;
+      res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token must be a valid token' }); break;
     case 'ValidationError':
       res.status(StatusCodes.BAD_REQUEST).json({ message: details[0].message }); break;
     case 'NotFoundError':

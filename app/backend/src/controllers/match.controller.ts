@@ -25,11 +25,23 @@ class MatchesController {
     }
   }
 
+  public async finishMatch(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      await this._service.finishMatch(Number(id));
+      res.status(StatusCodes.OK).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   public async changeMatch(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      await this._service.changeMatch(Number(id));
-      res.status(StatusCodes.OK).json({ message: 'Finished' });
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      const newScore = { homeTeamGoals, awayTeamGoals };
+      const result = await this._service.changeMatch(Number(id), newScore);
+      res.status(StatusCodes.OK).json(result);
     } catch (error) {
       next(error);
     }
