@@ -30,6 +30,41 @@ class LeaderboardService {
     return data as unknown as ILeaderboard[];
   }
 
+  public async getLeaderboard(): Promise<ILeaderboard[]> {
+    const leaderboard = await this.globalLeaderboard();
+    const result = leaderboard.sort((a, b) => {
+      const totalPoints = b.totalPoints - a.totalPoints;
+      const totalVictories = b.totalVictories - a.totalVictories;
+      const goalsBalance = b.goalsBalance - a.goalsBalance;
+      const goalsFavor = b.goalsFavor - a.goalsFavor;
+      const goalsOwn = b.goalsOwn - a.goalsOwn;
+      const calculus = totalPoints || totalVictories || goalsBalance || goalsFavor || goalsOwn;
+      return calculus;
+    });
+    return result;
+  }
+
+  public async globalLeaderboard(): Promise<ILeaderboard[]> {
+    const homeRank = await this.getHomeLeaderboard();
+    const awayRank = await this.getAwayLeaderboard();
+    return homeRank.map((home) => {
+      const away = awayRank.find((e) => e.name === home.name) as ILeaderboard;
+      return {
+        name: home.name,
+        totalPoints: Number(home.totalPoints) + Number(away.totalPoints),
+        totalGames: home.totalGames + away.totalGames,
+        totalVictories: Number(home.totalVictories) + Number(away.totalVictories),
+        totalDraws: Number(home.totalDraws) + Number(away.totalDraws),
+        totalLosses: Number(home.totalLosses) + Number(away.totalLosses),
+        goalsFavor: Number(home.goalsFavor) + Number(away.goalsFavor),
+        goalsOwn: Number(home.goalsOwn) + Number(away.goalsOwn),
+        goalsBalance: Number(home.goalsBalance) + Number(away.goalsBalance),
+        efficiency: `${(((Number(home.totalPoints) + Number(away.totalPoints))
+          / ((home.totalGames + away.totalGames) * 3)) * 100).toFixed(2)}`,
+      };
+    });
+  }
+
   public async getHomeLeaderboard(): Promise<ILeaderboard[]> {
     const j = 'COUNT(home_team)';
     const gp = 'SUM(home_team_goals)';

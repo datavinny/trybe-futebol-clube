@@ -22,6 +22,15 @@ class LeaderboardController {
       next(error);
     }
   }
+
+  public async getLeaderboard(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await this._service.getLeaderboard();
+      res.status(StatusCodes.OK).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default LeaderboardController;
