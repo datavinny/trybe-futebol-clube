@@ -5,8 +5,6 @@ Este projeto foi feito enquanto estudava na @betrybe. O front-end foi dado pela 
 
 O `TFC` é um site informativo sobre partidas e classificações de futebol! ⚽️
 
-  No time de desenvolvimento do `TFC`, seu *squad* ficou responsável por desenvolver uma API (utilizando o método `TDD`) e também integrar *- através do docker-compose -* as aplicações para que elas funcionem consumindo um banco de dados.
-
 ## :wrench: Técnologias usadas
 
 Back-end:
