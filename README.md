@@ -8,7 +8,7 @@ O `TFC` é um site informativo sobre partidas e classificações de futebol! ⚽
 ## :wrench: Técnologias usadas
 
 Back-end:
-  > Desenvolvido usando: NodeJS, ExpressJS, Sequelize, MYSQL, bcryptjs, docker
+  > Desenvolvido usando: NodeJS, ExpressJS, Sequelize, MYSQL, Docker, TypeScript, bcryptjs
 ## Author / Creditos
-<p><a href="https://github.com/datavinny">Davi Freitas </a>(df828316@gmail.com)</p>
-<p>Trybe</p>
+-<p><a href="https://github.com/datavinny">Davi Freitas </a>(df828316@gmail.com)</p>
+-<p>Trybe</p>
